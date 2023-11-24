@@ -1,49 +1,49 @@
 
-const path = require('node:path'); // Подключение модуля 'path' из Node.js для работы с путями файлов
-const HtmlWebPackPlugin = require('html-webpack-plugin'); // Подключение плагина 'html-webpack-plugin' для генерации HTML файлов
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin'); // Подключение плагина 'mini-css-extract-plugin' для извлечения CSS в отдельные файлы
+const path = require('node:path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: "./src/index.js", // Указание точки входа в приложение
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'), // Указание пути для вывода собранных файлов в папку 'dist' в текущем каталоге
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       {
-        test: /\.js$/, // Определение, что эти правила применяются к файлам JavaScript
-        exclude: /node_modules/, // Исключение папки 'node_modules' из обработки
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // Использование Babel для транспиляции JavaScript
+          loader: 'babel-loader',
         },
       },
       {
-        test: /\.html$/, // Определение, что эти правила применяются к HTML файлам
+        test: /\.html$/,
         use: [
           {
-            loader: 'html-loader', // Использование 'html-loader' для обработки HTML файлов
+            loader: 'html-loader',
           },
         ],
       },
       {
-        test: /\.css$/i, // Определение, что эти правила применяются к CSS файлам
-        use: [MiniCSSExtractPlugin.loader, 'css-loader'], // Использование 'css-loader' и 'MiniCSSExtractPlugin.loader' для обработки CSS файлов
+        test: /\.css$/i,
+        use: [MiniCSSExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i, // Определение, что эти правила применяются к изображениям
-        type: 'asset/resource', // Использование ресурсов для обработки изображений
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i, // Определение, что эти правила применяются к шрифтам
-        type: 'asset/resource', // Использование ресурсов для обработки шрифтов
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
       }
     ],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html', // Указание исходного HTML-файла для генерации
-      filename: './index.html', // Указание имени итогового HTML-файла
+      template: './src/index.html',
+      filename: './index.html',
     }),
-    new MiniCSSExtractPlugin() // Использование MiniCSSExtractPlugin для извлечения CSS в отдельные файлы
+    new MiniCSSExtractPlugin()
   ],
 };
